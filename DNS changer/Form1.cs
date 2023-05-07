@@ -126,7 +126,7 @@ namespace DNS_changer
 
         private void button6_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/phoenix15049");
+            System.Diagnostics.Process.Start("https://github.com/Phoenix15049/DNSchanger");
         }
     }
 }
