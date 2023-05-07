@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Net.NetworkInformation;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace DNS_changer
+{
+    public partial class Form1 : Form
+        
+    {
+        public void cmdrunner(string command)
+        {
+            ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd", "/c " + command)
+            {
+                RedirectStandardError = true,
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using (Process proc = new Process())
+            {
+                proc.StartInfo = procStartInfo;
+                proc.Start();
+
+                string output = proc.StandardOutput.ReadToEnd();
+
+                if (string.IsNullOrEmpty(output))
+                    output = proc.StandardError.ReadToEnd();
+
+            }
+        }
+        public string dnstocmd(string pri,string sec)
+        {
+            string cmnd = "";
+            cmnd += "wmic nicconfig where (IPEnabled=TRUE) call SetDNSServerSearchOrder (\""+ pri+ "\", \"" + sec + "\")";
+            return cmnd;
+        }
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //GOOGLE
+            cmdrunner(dnstocmd("8.8.8.8","8.8.4.4"));
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //CloudFlare
+            cmdrunner(dnstocmd("1.1.1.1", "1.0.0.1"));
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //Shecan
+            cmdrunner(dnstocmd("178.22.122.100", "185.51.200.2"));
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //Neustar
+            cmdrunner(dnstocmd("156.154.70.5", "156.154.71.5"));
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            //OpenDNS
+            cmdrunner(dnstocmd("208.67.222.222", "208.67.220.220"));
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Safe
+            cmdrunner(dnstocmd("195.46.39.39", "195.46.39.40"));
+        }
+
+        private void Auto_Click(object sender, EventArgs e)
+        {
+            //Auto
+            cmdrunner("wmic nicconfig where (IPEnabled=TRUE) call SetDNSServerSearchOrder ()");
+        }
+
+
+
+        private static IPAddress GetDnsAdress()
+        {
+            NetworkInterface[] networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+
+            foreach (NetworkInterface networkInterface in networkInterfaces)
+            {
+                if (networkInterface.OperationalStatus == OperationalStatus.Up)
+                {
+                    IPInterfaceProperties ipProperties = networkInterface.GetIPProperties();
+                    IPAddressCollection dnsAddresses = ipProperties.DnsAddresses;
+
+                    foreach (IPAddress dnsAdress in dnsAddresses)
+                    {
+                        return dnsAdress;
+                    }
+                }
+            }
+
+            throw new InvalidOperationException("Unable to find DNS Address");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            label13.Text = GetDnsAdress().ToString();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            label13.Text = GetDnsAdress().ToString();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/phoenix15049");
+        }
+    }
+}
