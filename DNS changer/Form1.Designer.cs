@@ -365,6 +365,8 @@
             this.Controls.Add(this.SH1);
             this.Controls.Add(this.GoogleDNS);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(536, 755);
+            this.MinimumSize = new System.Drawing.Size(536, 755);
             this.Name = "Form1";
             this.Text = "DNS changer";
             this.Load += new System.EventHandler(this.Form1_Load);
