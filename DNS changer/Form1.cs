@@ -53,42 +53,49 @@ namespace DNS_changer
         {
             //GOOGLE
             cmdrunner(dnstocmd("8.8.8.8","8.8.4.4"));
+            MessageBox.Show("DNS Changed successfully !","DNS",MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             //CloudFlare
             cmdrunner(dnstocmd("1.1.1.1", "1.0.0.1"));
+            MessageBox.Show("DNS Changed successfully !", "DNS", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             //Shecan
             cmdrunner(dnstocmd("178.22.122.100", "185.51.200.2"));
+            MessageBox.Show("DNS Changed successfully !", "DNS", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             //Neustar
             cmdrunner(dnstocmd("156.154.70.5", "156.154.71.5"));
+            MessageBox.Show("DNS Changed successfully !", "DNS", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button1_Click_2(object sender, EventArgs e)
         {
             //OpenDNS
             cmdrunner(dnstocmd("208.67.222.222", "208.67.220.220"));
+            MessageBox.Show("DNS Changed successfully !", "DNS", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //Safe
             cmdrunner(dnstocmd("195.46.39.39", "195.46.39.40"));
+            MessageBox.Show("DNS Changed successfully !", "DNS", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void Auto_Click(object sender, EventArgs e)
         {
             //Auto
             cmdrunner("wmic nicconfig where (IPEnabled=TRUE) call SetDNSServerSearchOrder ()");
+            MessageBox.Show("DNS Changed successfully !", "DNS", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
@@ -128,5 +135,7 @@ namespace DNS_changer
         {
             System.Diagnostics.Process.Start("https://github.com/Phoenix15049/DNSchanger");
         }
+
+
     }
 }
