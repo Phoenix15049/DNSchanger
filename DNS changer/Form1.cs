@@ -128,7 +128,14 @@ namespace DNS_changer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label13.Text = GetDnsAdress().ToString();
+            try
+            {
+                label13.Text = GetDnsAdress().ToString();
+            }
+            catch (Exception)
+            { 
+                label13.Text = "DISABLED NETWORK!";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
