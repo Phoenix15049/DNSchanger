@@ -8,7 +8,9 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DNS_changer</RootNamespace>
     <AssemblyName>DNS changer</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <LangVersion>7.3</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -26,7 +28,7 @@
     <ProductName>DNS changer</ProductName>
     <PublisherName>Phoenix15049</PublisherName>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -63,24 +65,33 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Core\DnsProbe.cs" />
+    <Compile Include="Core\DnsService.cs" />
+    <Compile Include="Core\IpValidator.cs" />
+    <Compile Include="Core\SettingsStore.cs" />
+    <Compile Include="Models\AppSettings.cs" />
+    <Compile Include="Models\DnsEntry.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="UI\Controls\DnsListControl.cs" />
+    <Compile Include="UI\Controls\InputControls.cs" />
+    <Compile Include="UI\Controls\ModernButton.cs" />
+    <Compile Include="UI\Controls\StatusCard.cs" />
+    <Compile Include="UI\Controls\ThemedForm.cs" />
+    <Compile Include="UI\EntryEditorForm.cs" />
+    <Compile Include="UI\Gfx.cs" />
+    <Compile Include="UI\Glyphs.cs" />
+    <Compile Include="UI\MainForm.cs" />
+    <Compile Include="UI\Native.cs" />
+    <Compile Include="UI\SettingsForm.cs" />
+    <Compile Include="UI\Theme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -102,15 +113,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <!-- Build-time only: lets the project target .NET 4.5 without installing its targeting pack. -->
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="1183595.ico" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <ProductName>.NET Framework 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
